@@ -21,10 +21,11 @@ class RegisterController extends Controller
         // return $request;
         $validatedData = $request->validate(
             [
-                'nama' => ['required', 'max:55'],
-                'alamat' => ['required', 'max:30'],
-                'nohp' => ['required', 'min:3', 'max:15', 'unique:users'],
-                'email' => ['required', 'email', 'unique:users'],
+                'nama' => ['required', 'max:30'],
+                'username' => ['required', 'max:15', 'unique:users'],
+                'email' => ['required', 'max:30', 'unique:users'],
+                'npm' => ['required', 'max:8', 'unique:users'],
+                'kelas' => ['required', 'max:5'],
                 'password' => ['required', 'min:5', 'max:20'],
             ]
         );

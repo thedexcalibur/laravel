@@ -5,9 +5,9 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4">PetsQu Shop </span>
+                <span class="fs-4">Kursus Bahasa Pemrograman Universitas Jewepe </span>
             </a>
-            <ul class="nav nav-pills">
+            {{-- <ul class="nav nav-pills">
                 <!-- <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
                 @auth('web')
                     <li class="nav-item"><a href="/keranjang" class="nav-link fw-bold border-0"><i
@@ -16,7 +16,7 @@
                     <li class="nav-item"><a href="/register" class="nav-link fw-bold border-0"><i
                                 class="fa-solid fa-cart-shopping fa-fw fa-xl"></i></a></li>
                 @endauth
-            </ul>
+            </ul> --}}
             @auth('web')
                 <a class="btn btn-primary bg-white text-primary fw-bold border-0 text-decoration-none"> <i
                         class="fa-solid fa-user fa-fw fa-xl"></i>
@@ -27,7 +27,8 @@
                             class="fa-solid fa-right-from-bracket fa-fw fa-xl"></i> Keluar</button>
                 </form>
             @else
-                <a href="/login" class="fw-bold btn btn-outline-primary">Masuk</a>
+                <a href="/login" class="fw-bold btn btn-outline-primary mx-3">Masuk</a>
+                <a href="/register" class="fw-bold btn btn-outline-success">Register</a>
             @endauth
     </div>
 </header>

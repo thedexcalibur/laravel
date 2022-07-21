@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Models\Produk;
+use App\Models\Kursus;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,7 @@ use App\Models\Produk;
 */
 
 Route::get('/', [HomeController::class, 'pastibisa']);
+Route::get('/detailproduk', [HomeController::class, 'ayobisa'])->middleware('auth');
 
 
 Route::get('/login', [LoginController::class, 'ayobisa'])->name('login')->middleware('guest');
@@ -26,29 +27,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
-
+Route::get('/detailproduk/{id}', [HomeController::class, 'produkdetail'])->middleware('auth');
+// Route::get('/pelanggan', [HomeController::class, 'data_Mahasiswa'])->middleware('admin');
 
 Route::resource('/dashboard', DaftarProdukController::class)->middleware('admin');
-route::get('/keranjang', function () {
-    return view('keranjang');
-})->middleware('auth');
-route::get('/detailproduk', function () {
-    return view('detailproduk', [
-        'produk' => Produk::all(),
-    ]);
-});
-Route::get('/pelanggan', function () {
-    return view('pelanggan', [
-        'active' => 'Daftar Pelanggan'
-    ]);
-})->middleware('auth');
-Route::get('/detailpelanggan', function () {
-    return view('detailpelanggan', [
-        'active' => 'Daftar Pelanggan'
-    ]);
-})->middleware('auth');
-Route::get('/ubahproduk', function () {
-    return view('ubahproduk', [
-        'active' => 'Daftar Produk'
-    ]);
-})->middleware('auth');

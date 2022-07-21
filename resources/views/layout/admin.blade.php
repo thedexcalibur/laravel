@@ -32,7 +32,7 @@
         rel="stylesheet">
     {{-- ==============================End Tambahan CSS dan Styles================================================= --}}
 
-    <title> PetsQu Shop</title>
+    <title>Kursus Pemrograman Universitas Jewepe</title>
 </head>
 
 

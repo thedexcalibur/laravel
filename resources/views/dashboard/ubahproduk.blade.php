@@ -4,34 +4,40 @@
         <div class=" form-keranjang w-100 m-auto">
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"> <i class="fa-solid fa-fw fa-box-open text-primary"></i> Ubah Data Produk</h1>
+                <h1 class="h2"> <i class="fa-solid fa-fw fa-edit text-primary"></i> Ubah Data Kursus</h1>
             </div>
-            <form action="/dashboard/{{ $produk->id }}" method="POST" enctype="multipart/form-data">
+            <form action="/dashboard/{{ $produk->id }}" method="POST">
                 @csrf
                 @method('put')
-                <h5 class=" mb-3 fw-normal">Silahkan Ubah Data-Data berikut</h5>
+                <h5 class=" mb-3 fw-normal">Masukkan Data-Data berikut</h5>
                 <div class="form-floating">
-                    <input type="text" class="form-control mb-3" id="floatingInput" name="nama_produk"
-                        placeholder="Bambang Supratman" value="{{ old('nama_produk', $produk->nama_produk) }}" required>
-                    <label for="floatingInput">Nama Produk</label>
+                    <input type="text" class="form-control mb-3" name="namakursus" id="floatingInput"
+                        placeholder="Bambang Supratman" maxlength="30"
+                        value="{{ old('namakursus', $produk->namakursus) }}" required>
+                    <label for="floatingInput">Nama Kursus</label>
                 </div>
                 <div class="form-floating">
-                    <input type="number" class="form-control mb-3" name="harga" id="floatingInput"
-                        placeholder="082122332212" required value="{{ old('harga', $produk->harga) }}">
-                    <label for="floatingInput">Harga</label>
+                    <input type="text" class="form-control mb-3" name="deskripsi" id="floatingInput"
+                        placeholder="082122332212" required maxlength="64"
+                        value="{{ old('deskripsi', $produk->deskripsi) }}">
+                    <label for="floatingInput">Deskripsi Kursus</label>
                 </div>
-
-                <div class="mb-3">
-                    <input class="form-control" type="file" id="gambar" name="gambar_produk" onchange="previewImage()"
-                        value="{{ $produk->gambar_produk }}">
-                    @if ($produk->gambar_produk)
-                        <img src="{{ '/storage/produk/' . $produk->gambar_produk }}"
-                            class="img-preview img-fluid mb-3 mt-3 col-sm-5 d-block">
-                    @else
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
-                    @endif
+                <div class="form-floating">
+                    <input type="date" class="form-control mb-3" name="waktu" id="floatingInput"
+                        placeholder="Bambang Supratman" required value="{{ old('waktu', $produk->waktu) }}">
+                    <label for="floatingInput">Waktu Kursus</label>
                 </div>
-                <button type="submit" class="w-100 btn btn-lg btn-primary">Ubah Data Produk</button>
+                <label class="mb-3" for="floatingInput">
+                    <td>Jadwal Sebelumnya : {{ \Carbon\Carbon::parse($produk->waktu)->format('d F Y') }}</td>
+                </label>
+                <div class="form-floating">
+                    <input type="text"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                        class="form-control mb-3" name="lama" maxlength="3" value="{{ old('lama', $produk->lama) }}"
+                        id="floatingInput" placeholder="082122332212">
+                    <label for="floatingInput">Lama Kursus (Hari)</label>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Ubah Data Kursus</button>
             </form>
 
             <div style="padding-bottom: 2%"></div>

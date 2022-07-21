@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
+use App\Models\Kursus;
 use Illuminate\Http\Request;
 
 class DaftarProdukController extends Controller
@@ -15,8 +15,8 @@ class DaftarProdukController extends Controller
     public function index()
     {
         return view('dashboard.index', [
-            'active' => 'Daftar Produk',
-            'produk' => Produk::latest()->get(),
+            'active' => 'Daftar Kursus',
+            'produk' => Kursus::latest()->get(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class DaftarProdukController extends Controller
     public function create()
     {
         return view('dashboard.tambahproduk', [
-            'active' => 'Daftar Produk'
+            'active' => 'Daftar Kursus'
         ]);
     }
 
@@ -41,18 +41,13 @@ class DaftarProdukController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $dataproduk = $request->validate([
-            'nama_produk' => 'required',
-            'gambar_produk' => 'file|max:4096',
-            'harga' => 'required',
+        $datakursus = $request->validate([
+            'namakursus' => ['required', 'max:30', 'unique:kursus'],
+            'deskripsi' => ['required', 'max:64',],
+            'waktu' => ['required', 'date'],
+            'lama' => ['required', 'max:3'],
         ]);
-        $request->hasFile('gambar_produk');
-        $path = storage_path('app/public/produk/');
-        $file = $request->file('gambar_produk');
-        $name =  uniqid() . '_' . trim($file->getClientOriginalName());
-        $file->move($path, $name);
-        $dataproduk['gambar_produk'] = $name;
-        Produk::create($dataproduk);
+        Kursus::create($datakursus);
         return redirect('/dashboard')->with('success', 'Data Produk berhasil Ditambahkan!');
     }
 
@@ -62,10 +57,6 @@ class DaftarProdukController extends Controller
      * @param  \App\Models\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function show(Produk $produk)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -75,11 +66,11 @@ class DaftarProdukController extends Controller
      */
     public function edit($id)
     {
-        $Produk = Produk::findOrFail($id);
+        $Kursus = Kursus::findOrFail($id);
         return view('dashboard.ubahproduk', [
-            'title' => 'Ubah Produk',
-            'active' => 'Daftar Produk',
-            'produk' => $Produk,
+            'title' => 'Ubah Data Kursus',
+            'active' => 'Daftar Kursus',
+            'produk' => $Kursus,
         ]);
     }
 
@@ -92,27 +83,14 @@ class DaftarProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataproduk = Produk::findOrFail($id);
-
-        $produk = $request->validate([
-            'nama_produk' => 'required',
-            'gambar_produk' => 'file|max:4096',
-            'harga' => 'required',
+        $datakursus = $request->validate([
+            'namakursus' => ['required', 'max:30'],
+            'deskripsi' => ['required', 'max:64',],
+            'waktu' => ['required', 'date'],
+            'lama' => ['required', 'max:3'],
         ]);
-        $hapusgambar = public_path('storage/produk/' . $dataproduk->gambar_produk);
-        if ($request->hasfile('gambar_produk')) {
-            if (file_exists($hapusgambar)) {
-                unlink($hapusgambar);
-            }
-            $request->hasFile('gambar_produk');
-            $path = storage_path('app/public/produk/');
-            $file = $request->file('gambar_produk');
-            $name =  uniqid() . '_' . trim($file->getClientOriginalName());
-            $file->move($path, $name);
-            $produk['gambar_produk'] = $name;
-        }
-        Produk::where('id', $id)->update($produk);
-        return redirect('/dashboard')->with('success', 'Data Produk berhasil diubah!');
+        Kursus::whereId($id)->update($datakursus);
+        return redirect('/dashboard')->with('success', 'Data Kursus berhasil Diubah!');
     }
 
     /**
@@ -123,12 +101,7 @@ class DaftarProdukController extends Controller
      */
     public function destroy($id)
     {
-        $hapusproduk = Produk::findOrFail($id);
-        $hapusgambar = public_path('storage/produk/' . $hapusproduk->gambar_produk);
-        if (file_exists($hapusgambar)) {
-            unlink($hapusgambar);
-        }
-        Produk::where('id', $id)->delete();
-        return redirect('/dashboard')->with('success', 'Produk berhasil dihapus!');
+        Kursus::where('id', $id)->delete();
+        return redirect('/dashboard')->with('success', 'Data Kursus berhasil dihapus!');
     }
 }

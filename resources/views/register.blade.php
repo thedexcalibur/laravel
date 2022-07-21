@@ -10,23 +10,30 @@
                 <h5 class=" mb-3 fw-normal">Masukkan Data-Data berikut</h5>
                 <div class="form-floating">
                     <input type="text" class="form-control mb-3" id="floatingInput" name="nama"
-                        placeholder="Bambang Supratman">
+                        placeholder="Bambang Supratman" maxlength="30">
                     <label for="floatingInput">Nama Lengkap</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control mb-3" name="alamat" placeholder="Jln. Merdeka Selatan No. 1 Jakarta"
-                        id="floatingTextarea2" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Alamat</label>
+                    <input type="text" class="form-control mb-3" id="floatingInput" name="username"
+                        placeholder="bambang1" maxlength="15">
+                    <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input type="number" class="form-control mb-3" name="nohp" id="floatingInput"
-                        placeholder="082122332212">
-                    <label for="floatingInput">Nomor HP</label>
-                </div>
-                <div class="form-floating">
-                    <input type="email" class="form-control mb-3" name="email" id="floatingInput"
-                        placeholder="name@example.com">
+                    <input type="email" class="form-control mb-3" id="floatingInput" name="email" placeholder="bambang1"
+                        maxlength="15">
                     <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                        class="form-control mb-3" name="npm" maxlength="8" id="floatingInput"
+                        placeholder="082122332212">
+                    <label for="floatingInput">NPM</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control mb-3" id="floatingInput" name="kelas" maxlength="5"
+                        placeholder="4KA33">
+                    <label for="floatingInput">Kelas</label>
                 </div>
                 <div class="form-floating">
                     <input type="password" class="form-control mb-3" name="password" onkeyup='check();'

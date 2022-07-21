@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
+use App\Models\Kursus;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +12,16 @@ class HomeController extends Controller
         return view('index', [
             'title' => 'Home',
             'active' => 'Home',
-            'produk' => Produk::latest()->get(),
+            'produk' => Kursus::latest()->get(),
+        ]);
+    }
+    public function produkdetail($id)
+    {
+        $dataProduk = Kursus::findOrFail($id);
+
+        return view('detailproduk', [
+            'title' => 'Detail Kursus',
+            'produk' => $dataProduk
         ]);
     }
 }

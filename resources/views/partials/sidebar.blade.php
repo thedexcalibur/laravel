@@ -2,18 +2,24 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link {{ $active === 'Daftar Produk' ? 'active' : '' }}" aria-current="page"
+                <a class="nav-link {{ $active === 'Daftar Kursus' ? 'active' : '' }}" aria-current="page"
                     href="/dashboard">
                     <span class="align-text-bottom"></span>
-                    <i class="fa-solid fa-fw fa-box"></i> Daftar Produk
+                    <i class="fa-solid fa-fw fa-solid fa-swatchbook"></i> Daftar Kursus
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $active === 'Daftar Pelanggan' ? 'active' : '' }}" href="/pelanggan">
+                <a class="nav-link {{ $active === 'Daftar Mahasiswa' ? 'active' : '' }}" href="/pelanggan">
                     <span class="align-text-bottom"></span>
-                    <i class="fa-solid fa-people-group fa-fw"></i> Daftar Pelanggan
+                    <i class="fa-solid fa-people-group fa-fw"></i> Daftar Mahasiswa
                 </a>
             </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link {{ $active === 'Jadwal Kursus' ? 'active' : '' }}" href="/pelanggan">
+                    <span class="align-text-bottom"></span>
+                    <i class="fa-solid fa-calendar fa-fw"></i> Jadwal Kursus
+                </a>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <span class="align-text-bottom"></span>
